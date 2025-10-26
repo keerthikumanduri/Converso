@@ -11,20 +11,25 @@ const SearchInput = () => {
     const searchParams = useSearchParams();
     const query = searchParams.get('topic') || '';
 
-    const [searchQuery, setSearchQuery] = useState('');
+    // initialize the input from the URL param so component doesn't fight the router on mount
+    const [searchQuery, setSearchQuery] = useState(query);
 
     useEffect(() => {
+        // debounce navigation and ensure we only push when the param actually needs to change
         const delayDebounceFn = setTimeout(() => {
-            if(searchQuery) {
-                const newUrl = formUrlQuery({
-                    params: searchParams.toString(),
-                    key: "topic",
-                    value: searchQuery,
-                });
+            if (searchQuery) {
+                if (searchQuery !== query) {
+                    const newUrl = formUrlQuery({
+                        params: searchParams.toString(),
+                        key: "topic",
+                        value: searchQuery,
+                    });
 
-                router.push(newUrl, { scroll: false });
+                    router.push(newUrl, { scroll: false });
+                }
             } else {
-                if(pathname === '/companions') {
+                
+                if (pathname === '/companions' && query) {
                     const newUrl = removeKeysFromUrlQuery({
                         params: searchParams.toString(),
                         keysToRemove: ["topic"],
@@ -33,8 +38,10 @@ const SearchInput = () => {
                     router.push(newUrl, { scroll: false });
                 }
             }
-        }, 500)
-    }, [searchQuery, router, searchParams, pathname]);
+        }, 500);
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchQuery, query, router, pathname, searchParams]);
 
     return (
         <div className="relative border border-black rounded-lg items-center flex gap-2 px-2 py-1 h-fit">

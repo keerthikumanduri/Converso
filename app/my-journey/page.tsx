@@ -10,6 +10,8 @@ import { currentUser } from "@clerk/nextjs/server"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 
+export const dynamic = 'force-dynamic'
+
 const Profile = async () => {
   const user = await currentUser()
   if(!user) redirect("/sign-in")

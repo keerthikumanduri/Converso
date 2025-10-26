@@ -3,6 +3,8 @@ import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation";
 
 
+export const dynamic = 'force-dynamic'
+
 const newCompanion = async() => {
   const { userId } = await auth();
   if(!userId) redirect("/sign-in")

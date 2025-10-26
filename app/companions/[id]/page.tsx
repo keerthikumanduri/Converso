@@ -9,6 +9,8 @@ interface companionSessionPageProps{
   params: Promise<{id: string}>
 }
 
+export const dynamic = 'force-dynamic'
+
 const CompanionSession = async ({ params }: companionSessionPageProps) => {
   const { id } = await params;
   const companion = await getCompanion(id)
