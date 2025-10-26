@@ -17,7 +17,7 @@ const Page = async () => {
   const recentSessionsCompanions = await getRecentSessions(10)
   return (
     <main>
-      <h1 className='text-2xl underline'>Popular Companions</h1>
+      <h1 className='text-2xl underline text-center w-full'>Popular Companions</h1>
       <section className='home-section'>
 
         {companions.map((companion) => (

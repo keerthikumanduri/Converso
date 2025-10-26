@@ -141,6 +141,10 @@ body {
 @layer components {
   .home-section {
     @apply flex gap-4 justify-between items-start w-full max-lg:flex-col-reverse max-lg:items-center;
+    /* subtle off-white background so hero sections don't blend with the navbar */
+    background-color: oklch(0.98 0 0);
+    padding: 1.25rem; /* small padding so bg is visible around content */
+    border-radius: 1rem;
   }
   .companions-grid {
     @apply flex flex-wrap gap-4 w-full max-md:justify-center;
@@ -170,7 +174,9 @@ body {
     @apply bg-primary text-white rounded-xl cursor-pointer px-4 py-2 flex items-center gap-2;
   }
   .navbar {
-    @apply flex items-center justify-between mx-auto w-full px-14 py-4 bg-white max-sm:px-4;
+    @apply flex items-center justify-between mx-auto w-full px-14 py-4 max-sm:px-4;
+    /* match the hero/home-section subtle off-white */
+    background-color: oklch(0.98 0 0);
   }
   /* Center logo when user is signed out */
   .navbar.signed-out {
