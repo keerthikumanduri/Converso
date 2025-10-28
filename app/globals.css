@@ -187,11 +187,14 @@ body {
     width: 64px;
     height: 60px;
   }
-  /* Sign-in panel positioning: center vertically and nudge right */
+  /* Sign-in panel positioning: center horizontally and vertically */
   .sign-in-container {
-    margin-left: 0;
+    margin: 0 auto; /* center within parent */
     max-width: 520px;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .btn-signin {
     @apply border border-black rounded-4xl px-4 py-2.5 text-sm font-semibold flex items-center gap-2 cursor-pointer;
