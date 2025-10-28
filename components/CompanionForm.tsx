@@ -36,7 +36,7 @@ const formSchema = z.object({
 
 
 const CompanionForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name:"",
@@ -203,10 +203,12 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
             <FormItem>
               <FormLabel>Estimated session duration in minutes</FormLabel>
               <FormControl>
-                <Input 
+                <Input
                   type="number"
-                  placeholder="15" 
-                  {...field} 
+                  placeholder="15"
+                  {...field}
+                  value={field.value as number | undefined}
+                  onChange={(e) => field.onChange(Number(e.target.value))}
                   className="input"
                 />
               </FormControl>
