@@ -84,7 +84,20 @@ export const getRecentSessions = async (limit = 10) => {
 
   if (error) throw new Error(error.message);
 
-  return data.map(({ companions }) => companions);
+  // Data may contain multiple rows for the same companion (if DB had duplicates).
+  // Deduplicate in-memory by companion id, keeping the most recent occurrence
+  // (the query is ordered by created_at DESC so the first seen is the newest).
+  const unique = new Map<string, Companion>();
+  for (const row of data) {
+    const companion: Companion = row.companions;
+    if (!companion || !companion.id) continue;
+    if (!unique.has(companion.id)) {
+      unique.set(companion.id, companion);
+    }
+    if (unique.size >= limit) break;
+  }
+
+  return Array.from(unique.values());
 };
 
 export const getUserSessions = async (userId: string, limit = 10) => {
@@ -98,7 +111,18 @@ export const getUserSessions = async (userId: string, limit = 10) => {
 
   if (error) throw new Error(error.message);
 
-  return data.map(({ companions }) => companions);
+  // Deduplicate by companion id (keep the most recent per companion)
+  const unique = new Map<string, Companion>();
+  for (const row of data) {
+    const companion: Companion = row.companions;
+    if (!companion || !companion.id) continue;
+    if (!unique.has(companion.id)) {
+      unique.set(companion.id, companion);
+    }
+    if (unique.size >= limit) break;
+  }
+
+  return Array.from(unique.values());
 };
 
 export const getUserCompanions = async (userId: string) => {
