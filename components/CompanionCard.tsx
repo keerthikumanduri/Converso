@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 interface CompanionCardProps{
   id: string;
@@ -11,7 +10,6 @@ interface CompanionCardProps{
   subject: string;
   duration: number;
   color: string;
-  // bookmarked prop removed — bookmarks feature removed from UI
 }
 
 const CompanionCard = ({id, name, topic, subject, duration, color}: CompanionCardProps) => {
@@ -20,7 +18,6 @@ const CompanionCard = ({id, name, topic, subject, duration, color}: CompanionCar
     <article className='companion-card' style={{backgroundColor: color}}>
       <div className='flex justify-between items-center'>
         <div className='subject-badge'>{subject}</div>
-        {/* bookmark button removed */}
       </div>
 
       <h2 className='text-2xl font-bold'>{name}</h2>

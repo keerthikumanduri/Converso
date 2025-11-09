@@ -1,4 +1,3 @@
-import React from 'react'
 import { cn, getSubjectColor } from '@/lib/utils';
 import {
   Table,
@@ -30,6 +29,7 @@ const CompanionsList = ({title, companions, classNames}: CompanionsListProps) =>
             <TableHead className='text-lg text-right '>Duration</TableHead>
           </TableRow>
         </TableHeader>
+        
         <TableBody>
           {companions?.map(({id, subject, name ,topic, duration}) => (
             <TableRow key={id}>
@@ -51,6 +51,7 @@ const CompanionsList = ({title, companions, classNames}: CompanionsListProps) =>
                   </div>
                 </Link>
               </TableCell>
+
               <TableCell>
                 <div  className='subject-badge w-fit max-md:hidden'>
                   {subject}

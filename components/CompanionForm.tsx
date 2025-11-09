@@ -48,7 +48,7 @@ const CompanionForm = () => {
     },
   })
  
-  // 2. Define a submit handler.
+// submit handler.
 const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const companion = await createCompanion(values)
 

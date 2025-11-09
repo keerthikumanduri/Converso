@@ -2,8 +2,8 @@
 
 import { auth } from "@clerk/nextjs/server";
 import { createSupabaseClient } from "@/lib/supabase";
-// revalidatePath removed (previously used for bookmarks)
 
+// saving a cmpanion into supabase
 export const createCompanion = async (formData: CreateCompanion) => {
   const { userId: author } = await auth();
   const supabase = createSupabaseClient();
