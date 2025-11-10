@@ -11,11 +11,9 @@ const SearchInput = () => {
     const searchParams = useSearchParams();
     const query = searchParams.get('topic') || '';
 
-    // initialize the input from the URL param so component doesn't fight the router on mount
     const [searchQuery, setSearchQuery] = useState(query);
 
     useEffect(() => {
-        // debounce navigation and ensure we only push when the param actually needs to change
         const delayDebounceFn = setTimeout(() => {
             if (searchQuery) {
                 if (searchQuery !== query) {
